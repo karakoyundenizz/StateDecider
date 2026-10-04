@@ -1,0 +1,195 @@
+<mxfile host="Electron">
+  <diagram name="Monitor" id="mon">
+    <mxGraphModel dx="2560" dy="1228" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1900" pageHeight="1080" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=center;fontSize=22;fontStyle=1;fontColor=#333333;" value="NodeStateMonitor" vertex="1">
+          <mxGeometry height="30" width="700" x="620" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;align=center;fontSize=13;fontStyle=2;fontColor=#888888;" value="observes and reports — issues no command, holds no threshold" vertex="1">
+          <mxGeometry height="20" width="700" x="620" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ext" parent="1" style="rounded=1;whiteSpace=wrap;html=1;container=1;collapsible=0;verticalAlign=top;align=center;spacingTop=6;fontSize=12;fontStyle=1;fillColor=none;strokeColor=#bbbbbb;dashed=1;fontColor=#999999;" value="outside this subdomain" vertex="1">
+          <mxGeometry height="440" width="280" x="-50" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="yaml" parent="ext" style="shape=folder;tabWidth=50;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;verticalAlign=middle;fillColor=#ffffff;strokeColor=#999999;align=center;fontSize=12;" value="&lt;b&gt;YAML&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#888888&quot; style=&quot;font-size:11px&quot;&gt;node names &amp;#183; rhythms&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="220" x="30" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="nodes" parent="ext" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#999999;align=center;fontSize=12;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;Managed lifecycle node&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#888888&quot; style=&quot;font-size:11px&quot;&gt;×100+&lt;/font&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;~/transition_event&lt;br&gt;~/get_state&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="220" x="30" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="extwarn" parent="ext" style="text;html=1;align=center;fontSize=11;fontColor=#b85450;whiteSpace=wrap;verticalAlign=top;" value="A restarted node&lt;br&gt;announces nothing." vertex="1">
+          <mxGeometry height="50" width="220" x="30" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="infra" parent="1" style="rounded=0;whiteSpace=wrap;html=1;container=1;collapsible=0;verticalAlign=top;align=center;spacingTop=6;fontSize=12;fontStyle=1;fillColor=#f4f8fc;strokeColor=#aaaaaa;fontColor=#7b96b3;" value="INFRASTRUCTURE" vertex="1">
+          <mxGeometry height="800" width="530" x="440" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="mnode" parent="infra" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#555555;align=center;fontSize=12;verticalAlign=top;spacingTop=8;" value="&lt;font style=&quot;font-size:11px&quot; color=&quot;#888888&quot;&gt;«ROS2»&lt;/font&gt;&lt;br&gt;&lt;b&gt;NodeStateMonitorNode&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#888888&quot; style=&quot;font-size:11px&quot;&gt;lifecycle node · composition root · one callback group&lt;br&gt;nothing blocks · single-threaded executor&lt;/font&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;- event_subs_ : map&amp;lt;string, Subscription&amp;gt;&lt;br&gt;- heartbeat_timer_ : Timer&lt;br&gt;- round_robin_timer_ : Timer&lt;/div&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;configure: reads the config, refuses&lt;br&gt;if it is wrong. activate: builds and&lt;br&gt;forwards the event and two ticks inward.&lt;br&gt;deactivate: destroys it all&lt;/div&gt;" vertex="1">
+          <mxGeometry height="230" width="470" x="30" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qsend" parent="infra" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#555555;align=center;fontSize=12;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;QuestionSender&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#888888&quot; style=&quot;font-size:11px&quot;&gt;one client per node · never blocks&lt;/font&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;- clients_ : map&amp;lt;string, Client&amp;lt;GetState&amp;gt;&amp;gt;&lt;br&gt;- pending_ : map&amp;lt;string, RequestId&amp;gt;&lt;/div&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;+ Send(node)&lt;br&gt;+ Drop(node)&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#888888&quot;&gt;after this the answer cannot land&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="470" x="30" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="pub" parent="infra" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#555555;align=center;fontSize=12;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;CurrentStatePublisher&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#888888&quot; style=&quot;font-size:11px&quot;&gt;a sink: no timer, reads nothing&lt;/font&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;- publisher_ : Publisher&amp;lt;CurrentSystemState&amp;gt;&lt;/div&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;+ PublishSnapshot(rows)&lt;br&gt;+ PublishDelta(row)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="130" width="470" x="30" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="app" parent="1" style="rounded=0;whiteSpace=wrap;html=1;container=1;collapsible=0;verticalAlign=top;align=center;spacingTop=6;fontSize=12;fontStyle=1;fillColor=#f8f5fb;strokeColor=#aaaaaa;fontColor=#9080a8;" value="APPLICATION" vertex="1">
+          <mxGeometry height="520" width="1100" x="1180" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="ctrl" parent="app" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#555555;align=center;fontSize=12;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;MonitorController&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;+ OnTransitionEvent(node, start, goal)&lt;br&gt;+ OnReply(node, reply)&lt;br&gt;+ OnHeartbeatTick(is_present)&lt;br&gt;+ OnRoundRobinTick()&lt;/div&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;&lt;font color=&quot;#888888&quot;&gt;the order the other two are touched in&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="130" width="1020" x="40" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="reg" parent="app" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#555555;align=center;fontSize=12;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;ObservedStateRegistry&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;- nodes_ : map&amp;lt;string, WatchedNode&amp;gt;&lt;/div&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;+ RecordEvent(node, goal, at) : bool&lt;br&gt;+ RecordReply(node, state, at) : bool&lt;br&gt;+ RecordNoReply(node) : bool&lt;br&gt;+ RecordPresence(node, present) : bool&lt;br&gt;+ Snapshot(now) : vector&amp;lt;NodeState&amp;gt;&lt;/div&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;&lt;font color=&quot;#888888&quot;&gt;bool = did the row change?&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="210" width="290" x="40" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="qlog" parent="app" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#555555;align=center;fontSize=12;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;QuestionLog&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;- node_names_ : vector&amp;lt;string&amp;gt;&lt;br&gt;- awaiting_reply_ : map&amp;lt;string, time_point&amp;gt;&lt;br&gt;- next_to_ask_ : size_t&lt;/div&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;+ NextToAsk(may_ask) : optional&amp;lt;string&amp;gt;&lt;br&gt;+ RecordAsked(node, at) : bool&lt;br&gt;+ RecordAnswered(node) : bool&lt;br&gt;+ TakeOverdue(now, timeout)&lt;/div&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;&lt;font color=&quot;#888888&quot;&gt;one question in flight per node,&lt;br&gt;every turn once per cycle&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="210" width="290" x="685" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="watched" parent="app" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#555555;align=center;fontSize=12;verticalAlign=top;spacingTop=8;" value="&lt;font style=&quot;font-size:11px&quot; color=&quot;#888888&quot;&gt;«record»&lt;/font&gt;&lt;br&gt;&lt;b&gt;WatchedNode&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;state : optional&amp;lt;LifecycleState&amp;gt;&lt;br&gt;last_seen_goal : optional&amp;lt;uint8&amp;gt;&lt;br&gt;present : bool&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#888888&quot;&gt;↑ seeds a late start&lt;/font&gt;&lt;br&gt;transitioning : bool&lt;br&gt;since : time_point&lt;br&gt;unanswered_in_a_row : uint16&lt;/div&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;&lt;font color=&quot;#888888&quot;&gt;facts only — no thresholds&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="170" width="220" x="420" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="port" parent="1" style="rounded=0;whiteSpace=wrap;html=1;container=1;collapsible=0;verticalAlign=top;align=center;spacingTop=6;fontSize=12;fontStyle=1;fillColor=#fbf8f2;strokeColor=#aaaaaa;fontColor=#a08850;" value="PORT — outbound" vertex="1">
+          <mxGeometry height="170" width="1100" x="1180" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="iQS" parent="port" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#555555;dashed=1;align=center;fontSize=12;verticalAlign=top;spacingTop=6;" value="&lt;font color=&quot;#888888&quot; style=&quot;font-size:11px&quot;&gt;«interface»&lt;/font&gt;&lt;br&gt;&lt;b&gt;IQuestionSender&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;+ Send(node)&lt;br&gt;+ Drop(node)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="116.875" width="260" x="60" y="40.0025" as="geometry" />
+        </mxCell>
+        <mxCell id="iCSP" parent="port" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#555555;dashed=1;align=center;fontSize=12;verticalAlign=top;spacingTop=6;" value="&lt;font color=&quot;#888888&quot; style=&quot;font-size:11px&quot;&gt;«interface»&lt;/font&gt;&lt;br&gt;&lt;b&gt;ICurrentStatePublisher&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;+ PublishSnapshot(rows)&lt;br&gt;+ PublishDelta(row)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="116.875" width="260" x="420" y="40.0025" as="geometry" />
+        </mxCell>
+        <mxCell id="iMC" parent="port" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#555555;dashed=1;align=center;fontSize=12;verticalAlign=top;spacingTop=6;" value="&lt;font color=&quot;#888888&quot; style=&quot;font-size:11px&quot;&gt;«interface»&lt;/font&gt;&lt;br&gt;&lt;b&gt;IMonotonicClock&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;+ Now()&lt;hr&gt;&lt;font color=&quot;#888888&quot;&gt;shared with the Enforcer&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="116.875" width="260" x="780" y="40.0025" as="geometry" />
+        </mxCell>
+        <mxCell id="topic" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fdfaf2;strokeColor=#555555;align=center;fontSize=12;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;/nodes_current_states&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;is_full_snapshot : bool&lt;br&gt;states[] : NodeState&lt;br&gt;&lt;font color=&quot;#888888&quot;&gt;state · has_state · is_present&lt;br&gt;is_transitioning · transitioning_for_ms&lt;br&gt;unanswered_in_a_row&lt;/font&gt;&lt;/div&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;&lt;font color=&quot;#888888&quot;&gt;one row, or every row&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="300" x="810" y="980" as="geometry" />
+        </mxCell>
+        <mxCell id="enf" parent="1" style="rounded=1;whiteSpace=wrap;html=1;container=1;collapsible=0;verticalAlign=top;align=center;spacingTop=6;fontSize=12;fontStyle=1;fillColor=none;strokeColor=#bbbbbb;dashed=1;fontColor=#999999;" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;NodeStateEnforcer&amp;nbsp;&amp;nbsp;the other node&lt;/span&gt;" vertex="1">
+          <mxGeometry height="340" width="400" x="1340" y="990" as="geometry" />
+        </mxCell>
+        <mxCell id="enfTxt" parent="enf" style="text;html=1;align=center;fontSize=11;fontColor=#777777;whiteSpace=wrap;verticalAlign=middle;" value="projects each age onto its own clock,&lt;br&gt;then applies thresholds and precedence" vertex="1">
+          <mxGeometry height="36" width="360" x="20" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="oss" parent="enf" style="rounded=0;whiteSpace=wrap;html=1;container=1;collapsible=0;verticalAlign=top;align=center;spacingTop=6;fontSize=12;fontStyle=1;fillColor=#f3f9f4;strokeColor=#555555;fontColor=#333333;" value="ObservedSystemState&lt;br&gt;&lt;font style=&quot;font-size:11px;font-weight:normal&quot; color=&quot;#777777&quot;&gt;map&amp;lt;name, NodeObservation&amp;gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="248" width="360" x="20" y="76" as="geometry" />
+        </mxCell>
+        <mxCell id="nobs" parent="oss" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#555555;align=center;fontSize=12;verticalAlign=top;spacingTop=8;" value="&lt;font style=&quot;font-size:11px&quot; color=&quot;#888888&quot;&gt;«record»&lt;/font&gt;&lt;br&gt;&lt;b&gt;NodeObservation&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;last_known_state : optional&amp;lt;LifecycleState&amp;gt;&lt;br&gt;availability : NodeAvailability&lt;/div&gt;&lt;hr&gt;&lt;div style=&quot;font-size:11px&quot;&gt;Present · Moving · MovingTooLong&lt;br&gt;NotAnswering · Departed&lt;br&gt;&lt;font color=&quot;#888888&quot;&gt;exactly one — cannot contradict&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="170" width="320" x="20" y="58" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" edge="1" parent="1" source="yaml" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#333333;strokeWidth=3;endArrow=block;endFill=1;endSize=8;exitX=1;exitY=0.5;entryX=0;entryY=0.12;fontSize=11;fontColor=#333333;labelBackgroundColor=#ffffff;verticalAlign=bottom;" target="mnode" value="node names &amp;#183; rhythms">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" edge="1" parent="1" source="nodes" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#333333;strokeWidth=3;endArrow=block;endFill=1;endSize=8;exitX=1;exitY=0.3;entryX=0;entryY=0.42;fontSize=11;fontColor=#333333;labelBackgroundColor=#ffffff;verticalAlign=bottom;" target="mnode" value="transition events">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" edge="1" parent="1" source="qsend" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#333333;strokeWidth=3;dashed=1;endArrow=open;endFill=0;endSize=10;exitX=0;exitY=0.5;entryX=1;entryY=0.78;fontSize=11;fontColor=#333333;labelBackgroundColor=#ffffff;verticalAlign=top;" target="nodes" value="get_state">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" edge="1" parent="1" source="ctrl" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#333333;strokeWidth=3;endArrow=block;endFill=1;endSize=8;fontSize=11;fontColor=#333333;labelBackgroundColor=#ffffff;verticalAlign=bottom;exitX=0.157;exitY=1;entryX=0.5;entryY=0;" target="reg" value="records &amp;#183; reads">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a6" edge="1" parent="1" source="ctrl" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#333333;strokeWidth=3;fontSize=11;fontColor=#333333;endArrow=block;endFill=1;endSize=8;exitX=0.603;exitY=1;entryX=0.5;entryY=0;" target="iCSP" value="delta &amp;#183; snapshot">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1835" y="600" />
+              <mxPoint x="1730" y="600" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a7" edge="1" parent="1" source="pub" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#333333;strokeWidth=3;endArrow=block;endFill=1;endSize=8;exitX=0.25;exitY=1;entryX=0;entryY=0.4;exitDx=0;exitDy=0;" target="topic">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a8" edge="1" parent="1" source="topic" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#333333;strokeWidth=3;endArrow=block;endFill=1;endSize=8;exitX=1;exitY=0.5;entryX=0;entryY=0.35;" target="enf">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a9" edge="1" parent="1" source="watched" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#777777;strokeWidth=1;endArrow=diamondThin;endFill=1;endSize=10;fontSize=11;fontColor=#888888;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" target="reg" value="one per node">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="leg" parent="1" style="rounded=0;whiteSpace=wrap;html=1;container=1;collapsible=0;verticalAlign=top;align=center;spacingTop=6;fontSize=12;fontStyle=1;fillColor=#ffffff;strokeColor=#999999;fontColor=#666666;" value="LEGEND" vertex="1">
+          <mxGeometry height="190" width="640" x="-200" y="920" as="geometry" />
+        </mxCell>
+        <mxCell id="legL1" edge="1" parent="leg" style="endArrow=block;endFill=1;endSize=8;html=1;strokeColor=#333333;strokeWidth=3;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="29.090909090909093" y="50" as="sourcePoint" />
+            <mxPoint x="87.27272727272728" y="50" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legL1t" parent="leg" style="text;html=1;align=left;fontSize=12;fontColor=#333333;whiteSpace=wrap;verticalAlign=middle;" value="&lt;b&gt;sends&lt;/b&gt; — the source pushed the data" vertex="1">
+          <mxGeometry height="24" width="240" x="101.81818181818183" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="legL2" edge="1" parent="leg" style="endArrow=open;endFill=0;endSize=10;html=1;strokeColor=#333333;strokeWidth=3;dashed=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="29.090909090909093" y="88" as="sourcePoint" />
+            <mxPoint x="87.27272727272728" y="88" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legL2t" parent="leg" style="text;html=1;align=left;fontSize=12;fontColor=#333333;whiteSpace=wrap;verticalAlign=middle;" value="&lt;b&gt;asks&lt;/b&gt; — the answer comes back along it" vertex="1">
+          <mxGeometry height="24" width="240" x="101.81818181818183" y="76" as="geometry" />
+        </mxCell>
+        <mxCell id="legL3" edge="1" parent="leg" style="endArrow=diamondThin;endFill=1;endSize=10;html=1;strokeColor=#777777;strokeWidth=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="22" y="118" as="sourcePoint" />
+            <mxPoint x="102" y="118" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legL3b" parent="leg" style="text;html=1;align=left;fontSize=12;fontColor=#333333;whiteSpace=wrap;verticalAlign=middle;" value="&lt;b&gt;held by&lt;/b&gt; — the diamond sits on the owner" vertex="1">
+          <mxGeometry height="24" width="330" x="140" y="118" as="geometry" />
+        </mxCell>
+        <mxCell id="legL3t" parent="leg" style="text;html=1;align=left;fontSize=11;fontColor=#666666;whiteSpace=wrap;verticalAlign=middle;fontStyle=2" value="The arrow always points from whoever started the call.&lt;br&gt;&lt;br&gt;A dashed box is an interface, or something we do not own.&lt;br&gt;Red text marks a known failure mode." vertex="1">
+          <mxGeometry height="80" width="240" x="370.90909090909093" y="18" as="geometry" />
+        </mxCell>
+        <mxCell id="legL4" edge="1" parent="leg" style="endArrow=block;endFill=0;endSize=12;html=1;strokeColor=#333333;strokeWidth=3;dashed=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="22" y="158" as="sourcePoint" />
+            <mxPoint x="91" y="158" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legL4a" parent="leg" style="fillColor=none;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="1" width="1" x="20" y="158" as="geometry" />
+        </mxCell>
+        <mxCell id="legL4b" parent="leg" style="fillColor=none;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="1" width="1" x="90" y="158" as="geometry" />
+        </mxCell>
+        <mxCell id="legL4t" parent="leg" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" value="&lt;b&gt;implements&lt;/b&gt; — hollow head, points at the interface" vertex="1">
+          <mxGeometry height="24" width="330" x="102" y="146" as="geometry" />
+        </mxCell>
+        <mxCell id="e_qlog" edge="1" parent="1" source="ctrl" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#333333;strokeWidth=3;endArrow=block;endFill=1;endSize=8;fontSize=11;fontColor=#333333;exitX=0.775;exitY=1;entryX=0.5;entryY=0;" target="qlog" value="asks &amp;#183; records">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ctrl" edge="1" parent="1" source="mnode" style="rounded=0;html=1;strokeColor=#333333;strokeWidth=3;endArrow=block;endFill=1;endSize=8;fontSize=11;fontColor=#333333;exitDx=0;exitDy=0;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.25;entryX=0;entryY=0.5;" target="ctrl" value="event &amp;#183; two ticks">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_reply" edge="1" parent="1" source="qsend" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#333333;strokeWidth=3;endArrow=block;endFill=1;endSize=8;fontSize=11;fontColor=#333333;exitX=1;exitY=0.25;entryX=0;entryY=0.85;labelBackgroundColor=#ffffff;" target="ctrl" value="reply">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_iqs" edge="1" parent="1" source="ctrl" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#333333;strokeWidth=3;fontSize=11;fontColor=#333333;endArrow=block;endFill=1;endSize=8;exitX=0.328;exitY=1;entryX=0.5;entryY=0;" target="iQS" value="Send() &amp;#183; Drop()">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1555" y="600" />
+              <mxPoint x="1370" y="600" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_imc" edge="1" parent="1" source="ctrl" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#333333;strokeWidth=3;fontSize=11;fontColor=#333333;dashed=1;endArrow=open;endFill=0;endSize=10;exitX=0.961;exitY=1;entryX=0.5;entryY=0;" target="iMC" value="Now()">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2200" y="600" />
+              <mxPoint x="2090" y="600" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_impl" edge="1" parent="1" source="pub" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#333333;strokeWidth=3;fontSize=11;fontColor=#333333;dashed=1;endArrow=block;endFill=0;endSize=12;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" target="iCSP" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="705" y="920" />
+              <mxPoint x="1730" y="920" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_impl2" edge="1" parent="1" source="qsend" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#333333;strokeWidth=3;fontSize=11;fontColor=#333333;dashed=1;endArrow=block;endFill=0;endSize=12;exitX=1;exitY=0.95;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="iQS" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

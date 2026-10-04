@@ -1,0 +1,9 @@
+# Public architecture showcase: allow only documentation and the three diagrams.
+*
+!/.gitignore
+!/README.md
+!/system_drawio/
+/system_drawio/*
+!/system_drawio/SystemOverview.drawio
+!/system_drawio/Monitor.drawio
+!/system_drawio/Enforcer.drawio
