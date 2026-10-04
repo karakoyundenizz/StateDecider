@@ -7,6 +7,17 @@ reconciles their states with mission targets. **The implementation is complete;
 source code exists and is kept private for confidentiality.** This public
 repository contains only architecture diagrams and this project overview.
 
+## Engineering approach
+
+- **ROS 2 / C++17:** lifecycle-node monitoring, asynchronous state transitions
+  and system-readiness reporting.
+- **Domain-Driven Design (DDD):** modeled lifecycle states, mission periods and
+  reconciliation rules in the domain, with explicit domain, application and
+  infrastructure boundaries. Core logic stays independent of ROS 2.
+- **Test-Driven Development (TDD):** wrote failing tests, implemented the behavior,
+  then refactored. Unit tests are complemented by integration scenarios against
+  real ROS 2 nodes.
+
 ## Architecture
 
 - **Monitor** observes lifecycle transitions, checks node presence and replies,
